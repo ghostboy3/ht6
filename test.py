@@ -7,13 +7,19 @@ HOST = '0.0.0.0'  # Listen on all interfaces
 PORT = 5001       # Pick an unused port
 LED_PIN = 17
 GPIO.setup(LED_PIN, GPIO.OUT)
+GPIO.setmode(GPIO.BCM)
+BUZZER_PIN = 18
+GPIO.setup(BUZZER_PIN, GPIO.OUT)
 
 
 def on():
     GPIO.output(LED_PIN, GPIO.HIGH)
+    GPIO.output(BUZZER_PIN, GPIO.HIGH)
     time.sleep(0.5)
 def off():
     GPIO.output(LED_PIN, GPIO.LOW)
+    GPIO.output(BUZZER_PIN, GPIO.LOW)
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     s.listen()
